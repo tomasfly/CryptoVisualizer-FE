@@ -52,30 +52,40 @@
                             <%= output[i].coin %>
                         </td>
                         <td>
-                            <% if (output[i].percentageIncrement> 1000) { %>
-                                <div style='color:red;'>
+
+                            <% if (output[i].percentageIncrement> 5000) { %>
+                                <div style='color:rgb(255, 15, 203);'>
                                     <%= output[i].percentageIncrement %>
 
                                 </div>
 
                                 <% } %>
+                                    <% if (output[i].percentageIncrement> 1000 && output[i].percentageIncrement < 5000)
+                                            { %>
+                                            <div style='color:red;'>
+                                                <%= output[i].percentageIncrement %>
 
-                                    <% if (output[i].percentageIncrement < 1000 && output[i].percentageIncrement> 500) {
-                                        %>
-                                        <div style='color:yellow;'>
-                                            <%= output[i].percentageIncrement %>
+                                            </div>
 
-                                        </div>
+                                            <% } %>
 
-                                        <% } %>
+                                                <% if (output[i].percentageIncrement < 1000 &&
+                                                    output[i].percentageIncrement> 500) {
+                                                    %>
+                                                    <div style='color:yellow;'>
+                                                        <%= output[i].percentageIncrement %>
 
-                                            <% if (output[i].percentageIncrement < 500) { %>
-                                                <div style='color:green;'>
-                                                    <%= output[i].percentageIncrement %>
+                                                    </div>
 
-                                                </div>
+                                                    <% } %>
 
-                                                <% } %>
+                                                        <% if (output[i].percentageIncrement < 500) { %>
+                                                            <div style='color:green;'>
+                                                                <%= output[i].percentageIncrement %>
+
+                                                            </div>
+
+                                                            <% } %>
                         </td>
                         <td>
                             <%= output[i].interval %>
