@@ -119,6 +119,34 @@ app.get('/rsi_five_minutes', (req, res) => {
     });
 
 });
+
+app.get('/rsi_fifteen_minutes', (req, res) => {
+
+    let options = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        tls: true,
+        tlsCAFile: "./ca-certificate.crt"
+    }
+
+    const uri = process.env.MONGODB_CONNECTION_STRING;
+    MongoClient.connect(uri, options, (err, client) => {
+        if (err) return console.log(err);
+        let db = client.db('test');
+        sort = { 'rsi': 1 }
+        let output = []
+        db.collection('rsi').find({ interval: "15m" }).sort(sort).limit(500).toArray(function (err, results) {
+            if (err) console.log(err)
+
+            results.forEach(element => {
+                output.push({ coin: element.coin, rsi: element.rsi, interval: element.interval, time: new Date() })
+            });
+            res.render('rsi_fifteen_minutes', { output });
+            client.close()
+        })
+    });
+
+});
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 // https://www.freecodecamp.org/news/deploy-nodejs-app-server-to-production/
