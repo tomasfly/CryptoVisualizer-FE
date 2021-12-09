@@ -54,10 +54,66 @@ app.get('/detailed', (req, res) => {
             if (err) console.log(err)
 
             results.forEach(element => {
-                output.push({ coin: element.coin, percentageIncrement: element.percentageIncrement, interval: element.interval, time: new Date(element.timestamp)})
+                output.push({ coin: element.coin, percentageIncrement: element.percentageIncrement, interval: element.interval, time: new Date(element.timestamp) })
 
             });
             res.render('index', { output });
+            client.close()
+        })
+    });
+
+});
+
+app.get('/rsi_one_hour', (req, res) => {
+
+    let options = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        tls: true,
+        tlsCAFile: "./ca-certificate.crt"
+    }
+
+    const uri = process.env.MONGODB_CONNECTION_STRING;
+    MongoClient.connect(uri, options, (err, client) => {
+        if (err) return console.log(err);
+        let db = client.db('test');
+        sort = { 'rsi': 1 }
+        let output = []
+        db.collection('rsi').find({ interval: "1h" }).sort(sort).limit(500).toArray(function (err, results) {
+            if (err) console.log(err)
+
+            results.forEach(element => {
+                output.push({ coin: element.coin, rsi: element.rsi, interval: element.interval, time: new Date() })
+            });
+            res.render('rsi_one_hour', { output });
+            client.close()
+        })
+    });
+
+});
+
+app.get('/rsi_five_minutes', (req, res) => {
+
+    let options = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        tls: true,
+        tlsCAFile: "./ca-certificate.crt"
+    }
+
+    const uri = process.env.MONGODB_CONNECTION_STRING;
+    MongoClient.connect(uri, options, (err, client) => {
+        if (err) return console.log(err);
+        let db = client.db('test');
+        sort = { 'rsi': 1 }
+        let output = []
+        db.collection('rsi').find({ interval: "5m" }).sort(sort).limit(500).toArray(function (err, results) {
+            if (err) console.log(err)
+
+            results.forEach(element => {
+                output.push({ coin: element.coin, rsi: element.rsi, interval: element.interval, time: new Date() })
+            });
+            res.render('rsi_five_minutes', { output });
             client.close()
         })
     });
