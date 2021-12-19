@@ -15,10 +15,8 @@ require('dotenv').config()
 app.get('/', (req, res) => {
 
     let options = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        tls: true,
-        tlsCAFile: "./ca-certificate.crt"
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
     }
 
     const uri = process.env.MONGODB_CONNECTION_STRING;
@@ -38,10 +36,8 @@ app.get('/', (req, res) => {
 app.get('/detailed', (req, res) => {
 
     let options = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        tls: true,
-        tlsCAFile: "./ca-certificate.crt"
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
     }
 
     const uri = process.env.MONGODB_CONNECTION_STRING;
@@ -67,10 +63,8 @@ app.get('/detailed', (req, res) => {
 app.get('/rsi_one_hour', (req, res) => {
 
     let options = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        tls: true,
-        tlsCAFile: "./ca-certificate.crt"
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
     }
 
     const uri = process.env.MONGODB_CONNECTION_STRING;
@@ -95,10 +89,8 @@ app.get('/rsi_one_hour', (req, res) => {
 app.get('/rsi_five_minutes', (req, res) => {
 
     let options = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        tls: true,
-        tlsCAFile: "./ca-certificate.crt"
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
     }
 
     const uri = process.env.MONGODB_CONNECTION_STRING;
@@ -123,10 +115,8 @@ app.get('/rsi_five_minutes', (req, res) => {
 app.get('/rsi_fifteen_minutes', (req, res) => {
 
     let options = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        tls: true,
-        tlsCAFile: "./ca-certificate.crt"
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
     }
 
     const uri = process.env.MONGODB_CONNECTION_STRING;
@@ -151,10 +141,8 @@ app.get('/rsi_fifteen_minutes', (req, res) => {
 app.get('/smas_difference_one_day', (req, res) => {
 
     let options = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        tls: true,
-        tlsCAFile: "./ca-certificate.crt"
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
     }
 
     const uri = process.env.MONGODB_CONNECTION_STRING;
