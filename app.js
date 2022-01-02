@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 
 });
 
-app.get('/detailed', (req, res) => {
+app.get('/volume_alert_1m', (req, res) => {
 
     let options = {
         sslKey: "./ca-certificate.crt",
@@ -46,14 +46,122 @@ app.get('/detailed', (req, res) => {
         let db = client.db('test');
         sort = { '_id': -1 }
         let output = []
-        db.collection('alerts').find({}).sort(sort).limit(100).toArray(function (err, results) {
+        db.collection('alerts').find({interval: "1m"}).sort(sort).limit(100).toArray(function (err, results) {
             if (err) console.log(err)
 
             results.forEach(element => {
                 output.push({ coin: element.coin, percentageIncrement: element.percentageIncrement, interval: element.interval, time: new Date(element.timestamp) })
 
             });
-            res.render('index', { output });
+            res.render('volume_alert_1m', { output });
+            client.close()
+        })
+    });
+
+});
+
+app.get('/volume_alert_15m', (req, res) => {
+
+    let options = {
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
+    }
+
+    const uri = process.env.MONGODB_CONNECTION_STRING;
+    MongoClient.connect(uri, options, (err, client) => {
+        if (err) return console.log(err);
+        let db = client.db('test');
+        sort = { '_id': -1 }
+        let output = []
+        db.collection('alerts').find({interval: "15m"}).sort(sort).limit(100).toArray(function (err, results) {
+            if (err) console.log(err)
+
+            results.forEach(element => {
+                output.push({ coin: element.coin, percentageIncrement: element.percentageIncrement, interval: element.interval, time: new Date(element.timestamp) })
+
+            });
+            res.render('volume_alert_15m', { output });
+            client.close()
+        })
+    });
+
+});
+
+app.get('/volume_alert_30m', (req, res) => {
+
+    let options = {
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
+    }
+
+    const uri = process.env.MONGODB_CONNECTION_STRING;
+    MongoClient.connect(uri, options, (err, client) => {
+        if (err) return console.log(err);
+        let db = client.db('test');
+        sort = { '_id': -1 }
+        let output = []
+        db.collection('alerts').find({interval: "30m"}).sort(sort).limit(100).toArray(function (err, results) {
+            if (err) console.log(err)
+
+            results.forEach(element => {
+                output.push({ coin: element.coin, percentageIncrement: element.percentageIncrement, interval: element.interval, time: new Date(element.timestamp) })
+
+            });
+            res.render('volume_alert_30m', { output });
+            client.close()
+        })
+    });
+
+});
+
+app.get('/volume_alert_1h', (req, res) => {
+
+    let options = {
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
+    }
+
+    const uri = process.env.MONGODB_CONNECTION_STRING;
+    MongoClient.connect(uri, options, (err, client) => {
+        if (err) return console.log(err);
+        let db = client.db('test');
+        sort = { '_id': -1 }
+        let output = []
+        db.collection('alerts').find({interval: "1h"}).sort(sort).limit(100).toArray(function (err, results) {
+            if (err) console.log(err)
+
+            results.forEach(element => {
+                output.push({ coin: element.coin, percentageIncrement: element.percentageIncrement, interval: element.interval, time: new Date(element.timestamp) })
+
+            });
+            res.render('volume_alert_1h', { output });
+            client.close()
+        })
+    });
+
+});
+
+app.get('/volume_alert_1d', (req, res) => {
+
+    let options = {
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
+    }
+
+    const uri = process.env.MONGODB_CONNECTION_STRING;
+    MongoClient.connect(uri, options, (err, client) => {
+        if (err) return console.log(err);
+        let db = client.db('test');
+        sort = { '_id': -1 }
+        let output = []
+        db.collection('alerts').find({interval: "1d"}).sort(sort).limit(100).toArray(function (err, results) {
+            if (err) console.log(err)
+
+            results.forEach(element => {
+                output.push({ coin: element.coin, percentageIncrement: element.percentageIncrement, interval: element.interval, time: new Date(element.timestamp) })
+
+            });
+            res.render('volume_alert_1d', { output });
             client.close()
         })
     });
