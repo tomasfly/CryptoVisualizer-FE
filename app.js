@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
         if (err) return console.log(err);
         let db = client.db('test');
         sort = { '_id': -1 }
-        db.collection('log').find({}).sort(sort).limit(100).toArray(function (err, results) {
+        db.collection('log').find({}).sort(sort).limit(200).toArray(function (err, results) {
             if (err) console.log(err)
             res.send(results)
             client.close()
@@ -46,7 +46,7 @@ app.get('/volume_alert_1m', (req, res) => {
         let db = client.db('test');
         sort = { '_id': -1 }
         let output = []
-        db.collection('alerts').find({interval: "1m"}).sort(sort).limit(100).toArray(function (err, results) {
+        db.collection('alerts').find({interval: "1m"}).sort(sort).limit(200).toArray(function (err, results) {
             if (err) console.log(err)
 
             results.forEach(element => {
@@ -73,7 +73,7 @@ app.get('/volume_alert_15m', (req, res) => {
         let db = client.db('test');
         sort = { '_id': -1 }
         let output = []
-        db.collection('alerts').find({interval: "15m"}).sort(sort).limit(100).toArray(function (err, results) {
+        db.collection('alerts').find({interval: "15m"}).sort(sort).limit(200).toArray(function (err, results) {
             if (err) console.log(err)
 
             results.forEach(element => {
@@ -100,7 +100,7 @@ app.get('/volume_alert_30m', (req, res) => {
         let db = client.db('test');
         sort = { '_id': -1 }
         let output = []
-        db.collection('alerts').find({interval: "30m"}).sort(sort).limit(100).toArray(function (err, results) {
+        db.collection('alerts').find({interval: "30m"}).sort(sort).limit(200).toArray(function (err, results) {
             if (err) console.log(err)
 
             results.forEach(element => {
@@ -127,7 +127,7 @@ app.get('/volume_alert_1h', (req, res) => {
         let db = client.db('test');
         sort = { '_id': -1 }
         let output = []
-        db.collection('alerts').find({interval: "1h"}).sort(sort).limit(100).toArray(function (err, results) {
+        db.collection('alerts').find({interval: "1h"}).sort(sort).limit(200).toArray(function (err, results) {
             if (err) console.log(err)
 
             results.forEach(element => {
@@ -135,6 +135,33 @@ app.get('/volume_alert_1h', (req, res) => {
 
             });
             res.render('volume_alert_1h', { output });
+            client.close()
+        })
+    });
+
+});
+
+app.get('/volume_alert_4h', (req, res) => {
+
+    let options = {
+        sslKey: "./ca-certificate.crt",
+        sslCert: "./ca-certificate.crt"
+    }
+
+    const uri = process.env.MONGODB_CONNECTION_STRING;
+    MongoClient.connect(uri, options, (err, client) => {
+        if (err) return console.log(err);
+        let db = client.db('test');
+        sort = { '_id': -1 }
+        let output = []
+        db.collection('alerts').find({interval: "4h"}).sort(sort).limit(200).toArray(function (err, results) {
+            if (err) console.log(err)
+
+            results.forEach(element => {
+                output.push({ coin: element.coin, percentageIncrement: element.percentageIncrement, interval: element.interval, time: new Date(element.timestamp) })
+
+            });
+            res.render('volume_alert_4h', { output });
             client.close()
         })
     });
@@ -154,7 +181,7 @@ app.get('/volume_alert_1d', (req, res) => {
         let db = client.db('test');
         sort = { '_id': -1 }
         let output = []
-        db.collection('alerts').find({interval: "1d"}).sort(sort).limit(100).toArray(function (err, results) {
+        db.collection('alerts').find({interval: "1d"}).sort(sort).limit(200).toArray(function (err, results) {
             if (err) console.log(err)
 
             results.forEach(element => {

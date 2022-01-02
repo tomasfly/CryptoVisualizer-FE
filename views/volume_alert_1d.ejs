@@ -49,7 +49,20 @@
                 <tbody>
                     <tr>
                         <td>
-                            <%= output[i].coin %>
+                            <% var coinCount=0 %>
+                                <% for(var j=0; j < output.length; j++) { %>
+
+                                    <% if (output[j].coin==output[i].coin) { %>
+
+                                        <% var coinCount = coinCount + 1 %>
+
+                                        <% } %>
+
+
+                                            <% } %>
+                                                <%= output[i].coin %>
+                                                <%= coinCount %>
+                                                
                         </td>
                         <td>
 
