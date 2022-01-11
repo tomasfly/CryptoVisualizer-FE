@@ -1,0 +1,117 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">coin</th>
+                    <th scope="col">percentageIncrement</th>
+                    <th scope="col">interval</th>
+                    <th scope="col">time</th>
+                </tr>
+            </thead>
+            <% for(var i=0; i < output.length; i++) { %>
+                <tbody>
+                    <tr>
+                        <td>
+                            <% var coinCount=0 %>
+                                <% for(var j=0; j < output.length; j++) { %>
+
+                                    <% if (output[j].coin==output[i].coin) { %>
+
+                                        <% var coinCount = coinCount + 1 %>
+
+                                        <% } %>
+
+
+                                            <% } %>
+                                                <%= output[i].coin %>
+                                                <%= coinCount %>
+                                                
+                        </td>
+                        <td>
+
+                            <% if (output[i].percentageIncrement> 5000) { %>
+                                <div style='color:rgb(255, 15, 203);'>
+                                    <%= output[i].percentageIncrement %>
+
+                                </div>
+
+                                <% } %>
+                                    <% if (output[i].percentageIncrement> 1000 && output[i].percentageIncrement < 5000)
+                                            { %>
+                                            <div style='color:red;'>
+                                                <%= output[i].percentageIncrement %>
+
+                                            </div>
+
+                                            <% } %>
+
+                                                <% if (output[i].percentageIncrement < 1000 &&
+                                                    output[i].percentageIncrement> 500) {
+                                                    %>
+                                                    <div style='color:yellow;'>
+                                                        <%= output[i].percentageIncrement %>
+
+                                                    </div>
+
+                                                    <% } %>
+
+                                                        <% if (output[i].percentageIncrement < 500) { %>
+                                                            <div style='color:green;'>
+                                                                <%= output[i].percentageIncrement %>
+
+                                                            </div>
+
+                                                            <% } %>
+                        </td>
+                        <td>
+                            <%= output[i].interval %>
+                        </td>
+                        <td>
+                            <%= output[i].time %>
+                        </td>
+                    </tr>
+                </tbody>
+                <% } %>
+        </table>
+
+    </div>
+</body>
+
+</html>
